@@ -30,10 +30,12 @@ class HomeController extends RegisterController
      */
     public function index()
     {
+        $slug = 'user';
         $listUsers = User::get();
         $listRoles = Role::get();
 
         return view('home', compact(
+            'slug',
             'listUsers',
             'listRoles'
         ));

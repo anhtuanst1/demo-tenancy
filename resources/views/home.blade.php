@@ -28,7 +28,7 @@
                         {{ $user->id }}
                     </td>
                     <td class="content">
-                        {{ $user->name }}
+                        {{ ucwords($user->name) }}
                     </td>
                     <td class="content">
                         {{ $user->email }}
