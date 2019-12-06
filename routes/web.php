@@ -19,4 +19,7 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/home', 'HomeController@index')->name('home');
+
+	Route::post('/user/create', 'HomeController@register')->name('createUser');
+	Route::post('/user/delete/{id}', 'HomeController@deleteUser')->name('deleteUser');
 });
