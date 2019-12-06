@@ -3,18 +3,22 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div id="navbarNavDropdown" class="navbar-collapse collapse justify-content-end">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item @if (isset($slug) && $slug == 'user') active @endif">
-                <a class="nav-link" href="{{ route('home') }}">
-                    Users
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item @if (isset($slug) && $slug == 'role') active @endif">
-                <a class="nav-link" href="{{ route('showListRoles') }}">
-                    Roles
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
+            @can('browse_user')
+                <li class="nav-item @if (isset($slug) && $slug == 'user') active @endif">
+                    <a class="nav-link" href="{{ route('home') }}">
+                        Users
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            @endcan
+            @can('browse_role')
+                <li class="nav-item @if (isset($slug) && $slug == 'role') active @endif">
+                    <a class="nav-link" href="{{ route('showListRoles') }}">
+                        Roles
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
         <ul class="navbar-nav nav-pills nav-fill">
             <li class="nav-item dropdown">

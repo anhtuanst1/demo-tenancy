@@ -3,9 +3,11 @@
 @section('content')
     <div class="mb-4">
         <h2 style="display: inline-block;">List Users</h2>
-        <a href="javascript:void(0);" class="btn btn-primary float-right mt-0" onclick="showModalCreateUser()">
-            Create User
-        </a>
+        @can('add_user')
+            <a href="javascript:void(0);" class="btn btn-primary float-right mt-0" onclick="showModalCreateUser()">
+                Create User
+            </a>
+        @endcan
     </div>
 
     <table id="users-table" class="table table-striped">
@@ -34,21 +36,31 @@
                         {{ $user->email }}
                     </td>
                     <td>
-                        <form action="{{ route('assignRoleForUser', $user->id) }}" method="POST">
-                            @csrf
-                            <select id="list-roles-{{ $user->id }}" class="w-50 role-select" name="role" required>
-                                @foreach ($listRoles as $role)
-                                    <option value="{{ $role->name }}" @if ($role->id == $roleId) selected @endif>{{ $role->name }}</option>
-                                @endforeach
-                            </select>
-                        </form>
+                        @can('edit_user')
+                            <form action="{{ route('assignRoleForUser', $user->id) }}" method="POST">
+                                @csrf
+                                <select id="list-roles-{{ $user->id }}" class="w-50 role-select" name="role" required>
+                                    @foreach ($listRoles as $role)
+                                        <option value="{{ $role->name }}" @if ($role->id == $roleId) selected @endif>{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                            </form>
+                        @else
+                            @foreach ($listRoles as $role)
+                                @if ($role->id == $roleId)
+                                    {{ ucwords($role->name) }}
+                                @endif
+                            @endforeach
+                        @endcan
                     </td>
                     <td>
-                        @if ($user->id != auth()->user()->id)
-                            <a href="javascript:void(0);" class="text-danger" onclick="showModalDeleteUser('{{ route('deleteUser', $user->id) }}')">
-                                Delete
-                            </a>
-                        @endif
+                        @can('delete_user')
+                            @if ($user->id != auth()->user()->id)
+                                <a href="javascript:void(0);" class="text-danger" onclick="showModalDeleteUser('{{ route('deleteUser', $user->id) }}')">
+                                    Delete
+                                </a>
+                            @endif
+                        @endcan
                     </td>
                 </tr>
             @endforeach

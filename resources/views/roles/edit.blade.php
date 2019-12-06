@@ -11,11 +11,13 @@
 
     <div class="mb-4">
         <h2 style="display: inline-block;">Edit Role</h2>
-        @if ($checkDelete)
-            <a href="javascript:void(0);" class="btn btn-danger float-right mt-0" onclick="showModalDeleteRole()">
-                Delete
-            </a>
-        @endif
+        @can('delete_role')
+            @if ($checkDelete)
+                <a href="javascript:void(0);" class="btn btn-danger float-right mt-0" onclick="showModalDeleteRole()">
+                    Delete
+                </a>
+            @endif
+        @endcan
         <a href="{{ route('showListRoles') }}" class="btn btn-primary float-right mt-0">
             Back
         </a>
@@ -149,9 +151,11 @@
                         </div>
                         <div class="col-md-12 form-group row mb-0">
                             <div class="col-md-12 mt-md-4 p-0">
-                                <button type="submit" class="btn btn-primary custom-button">
-                                    {{ __('SAVE') }}
-                                </button>
+                                @can('edit_role')
+                                    <button type="submit" class="btn btn-primary custom-button">
+                                        {{ __('SAVE') }}
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </form>

@@ -3,9 +3,11 @@
 @section('content')
     <div class="mb-4">
         <h2 style="display: inline-block;">List Roles</h2>
-        <a href="{{ route('viewCreateRole') }}" class="btn btn-primary float-right mt-0">
-            Create Role
-        </a>
+        @can('add_role')
+            <a href="{{ route('viewCreateRole') }}" class="btn btn-primary float-right mt-0">
+                Create Role
+            </a>
+        @endcan
     </div>
 
     <table id="users-table" class="table table-striped">
@@ -35,11 +37,13 @@
                         </a>
                     </td>
                     <td>
-                        @if ($checkDelete)
-                            <a href="javascript:void(0);" class="text-danger" onclick="showModalDeleteRole('{{ route('deleteRole', $role->id) }}')">
-                                Delete
-                            </a>
-                        @endif
+                        @can('delete_role')
+                            @if ($checkDelete)
+                                <a href="javascript:void(0);" class="text-danger" onclick="showModalDeleteRole('{{ route('deleteRole', $role->id) }}')">
+                                    Delete
+                                </a>
+                            @endif
+                        @endcan
                     </td>
                 </tr>
             @endforeach
