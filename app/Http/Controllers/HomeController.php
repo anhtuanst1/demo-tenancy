@@ -84,6 +84,19 @@ class HomeController extends RegisterController
         return $roleId;
     }
 
+    public function assignRoleForUser(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->syncRoles($request->role);
+
+        $response = [
+            'message'       => 'Assigned the role successfully!',
+            'alert-type'    => 'success'
+        ];
+
+        return redirect()->route('home')->with($response);
+    }
+
     public function logout()
     {
         Auth::logout();

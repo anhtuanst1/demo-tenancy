@@ -10,7 +10,7 @@
                 </a>
             </li>
             <li class="nav-item @if (isset($slug) && $slug == 'role') active @endif">
-                <a class="nav-link" href="{{ route('viewRoleList') }}">
+                <a class="nav-link" href="{{ route('showListRoles') }}">
                     Roles
                     <span class="sr-only">(current)</span>
                 </a>
