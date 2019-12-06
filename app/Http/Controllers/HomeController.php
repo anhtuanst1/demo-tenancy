@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\Auth\RegisterController;
 use App\User;
+use App\Model\Role;
 use Auth;
+use DB;
 use Log;
 
 class HomeController extends RegisterController
@@ -29,9 +31,11 @@ class HomeController extends RegisterController
     public function index()
     {
         $listUsers = User::get();
+        $listRoles = Role::get();
 
         return view('home', compact(
-            'listUsers'
+            'listUsers',
+            'listRoles'
         ));
     }
 
@@ -40,6 +44,7 @@ class HomeController extends RegisterController
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
+        $user->assignRole('super admin');
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath())->with([
@@ -50,6 +55,12 @@ class HomeController extends RegisterController
 
     public function deleteUser(Request $request)
     {
+        //delete all permissions
+        DB::table('model_has_permissions')->where('model_id', $request->id)->delete();
+
+        //delete all roles
+        DB::table('model_has_roles')->where('model_id', $request->id)->delete();
+
         User::find($request->id)->delete();
         $response = [
             'message'       => 'Delete Successfully!',
@@ -57,5 +68,24 @@ class HomeController extends RegisterController
         ];
 
         return redirect()->route('home')->with($response);
+    }
+
+    public static function getRoleIdByUserId($userId)
+    {
+        $roleId = DB::table('users')
+                ->join('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
+                ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+                ->where('users.id', $userId)->pluck('roles.id');
+
+        $roleId = (!$roleId->isEmpty()) ? $roleId[0] : '';
+
+        return $roleId;
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect('login');
     }
 }

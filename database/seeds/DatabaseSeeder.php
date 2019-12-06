@@ -11,6 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        // Run when first deploy
+		$this->call([
+			AddPermissionData::class,
+			AddSuperAdminRole::class
+        ]);
     }
 }

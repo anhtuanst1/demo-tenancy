@@ -33,7 +33,7 @@
 
     @include('layouts.navbar')
 
-    <main class="container">
+    <main class="container container-auth">
         @yield('content')
     </main>
     @yield('javascript')

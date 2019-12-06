@@ -20,6 +20,9 @@
         </thead>
         <tbody>
             @foreach($listUsers as $user)
+                <?php
+                    $roleId = App\Http\Controllers\HomeController::getRoleIdByUserId($user->id);
+                ?>
                 <tr>
                     <td class="content">
                         {{ $user->id }}
@@ -34,13 +37,18 @@
                         <form action="" method="POST">
                             @csrf
                             <select id="list-roles" class="w-50" name="role" required>
+                                @foreach ($listRoles as $role)
+                                    <option value="{{ $role->name }}" @if ($role->id == $roleId) selected @endif>{{ $role->name }}</option>
+                                @endforeach
                             </select>
                         </form>
                     </td>
                     <td>
-                        <a href="javascript:void(0);" class="text-danger" onclick="showModalDeleteUser('{{ route('deleteUser', $user->id) }}')">
-                            Delete
-                        </a>
+                        @if ($user->id != auth()->user()->id)
+                            <a href="javascript:void(0);" class="text-danger" onclick="showModalDeleteUser('{{ route('deleteUser', $user->id) }}')">
+                                Delete
+                            </a>
+                        @endif
                     </td>
                 </tr>
             @endforeach
