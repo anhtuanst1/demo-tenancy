@@ -2,16 +2,16 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Tenant Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Here you can register the tenant routes for your application.
+| These routes are loaded by the TenantRouteServiceProvider
+| with the tenancy and web middleware groups. Good luck!
 |
 */
 
-Route::get('/', function () {
+Route::get('/app', function () {
     return redirect()->route('login');
 });
 
