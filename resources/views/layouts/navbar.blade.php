@@ -1,0 +1,37 @@
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+    <a class="navbar-brand" href="{{ isset($info->name) ? route('home', $info->name) : '' }}">Logo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div id="navbarNavDropdown" class="navbar-collapse collapse justify-content-end">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="javascript:void(0);">
+                    Users
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="javascript:void(0);">
+                    Roles
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav nav-pills nav-fill">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i>&nbsp;&nbsp;
+                @if(isset($info))
+                    {{ $info->name }}
+                @else
+                    {{ Auth::user()->name }}
+                @endif
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <li>
+                        <a class="dropdown-item" href="javascript:void(0);"><b>{{ Auth::user()->email }}</b></a>
+                    </li>
+                    <li><a class="dropdown-item" href="{{ route('logout') }}" style="color: red">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -1,23 +1,43 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+    <h2>List Users</h2>
+    <br>
+    <table id="users-table" class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th class="w-5">Id</th>
+                <th class="w-20">Name</th>
+                <th class="w-30">Email</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($listUsers as $user)
+                <tr>
+                    <td class="content">
+                        {{ $user->id }}
+                    </td>
+                    <td class="content">
+                        {{ $user->name }}
+                    </td>
+                    <td class="content">
+                        {{ $user->email }}
+                    </td>
+                    <td>
+                        <form action="" method="POST">
+                            @csrf
+                            <select id="list-roles" class="w-50" name="role" required>
+                            </select>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@endsection
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@section('javascript')
+    <script>
+    </script>
 @endsection
