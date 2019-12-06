@@ -130,3 +130,14 @@ table {
 #users-table td.content {
   padding-top: 20px;
 }
+
+button.custom-button {
+  height: 35px;
+  width: 100px;
+}
+
+button.custom-button-cancel {
+  height: 35px;
+  width: 100px;
+  margin-left: 10px !important;
+}

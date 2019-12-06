@@ -28,15 +28,15 @@
                         {{ $user->id }}
                     </td>
                     <td class="content">
-                        {{ $user->name }}
+                        {{ ucwords($user->name) }}
                     </td>
                     <td class="content">
                         {{ $user->email }}
                     </td>
                     <td>
-                        <form action="" method="POST">
+                        <form action="{{ route('assignRoleForUser', $user->id) }}" method="POST">
                             @csrf
-                            <select id="list-roles" class="w-50" name="role" required>
+                            <select id="list-roles-{{ $user->id }}" class="w-50 role-select" name="role" required>
                                 @foreach ($listRoles as $role)
                                     <option value="{{ $role->name }}" @if ($role->id == $roleId) selected @endif>{{ $role->name }}</option>
                                 @endforeach
@@ -159,6 +159,10 @@
 
         $('input#password').change(function(){
             $('input#password-confirm').val($('input#password').val());
+        })
+
+        $('select.role-select').change(function(){
+            this.form.submit();
         })
     </script>
 @endsection

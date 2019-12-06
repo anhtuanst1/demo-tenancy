@@ -30,10 +30,12 @@ class HomeController extends RegisterController
      */
     public function index()
     {
+        $slug = 'user';
         $listUsers = User::get();
         $listRoles = Role::get();
 
         return view('home', compact(
+            'slug',
             'listUsers',
             'listRoles'
         ));
@@ -80,6 +82,19 @@ class HomeController extends RegisterController
         $roleId = (!$roleId->isEmpty()) ? $roleId[0] : '';
 
         return $roleId;
+    }
+
+    public function assignRoleForUser(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->syncRoles($request->role);
+
+        $response = [
+            'message'       => 'Assigned the role successfully!',
+            'alert-type'    => 'success'
+        ];
+
+        return redirect()->route('home')->with($response);
     }
 
     public function logout()
