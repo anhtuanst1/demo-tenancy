@@ -3,11 +3,11 @@
 ## Demo Tenancy vs Permission
 - Clone project.
 - Clone .env.example to .env (config Database and ROOT_DOMAIN) .
-- Run
+- Run    
 	`composer install`    
 	`php artisan key:generate`    
 	`php artisan migrate`    
-	`php artisan db:seed`
+	`php artisan db:seed --class=DatabaseSeeder`
 
 ## Package
 - [laravel-permission v3](https://docs.spatie.be/laravel-permission/v3/installation-laravel/)
