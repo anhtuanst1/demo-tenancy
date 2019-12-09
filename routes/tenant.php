@@ -11,30 +11,31 @@
 |
 */
 
-Route::get('/app', function () {
-    return redirect()->route('login');
-});
+Route::prefix('app')->group(function () {
+	Route::get('/', function () {
+		return redirect()->route('login');
+	});
 
-Auth::routes();
+	Auth::routes();
 
-Route::group(['middleware' => 'auth'], function () {
-	Route::get('/logout', 'HomeController@logout')->name('logout');
+	Route::get('/home', 'HomeController@index')->name('home')->middleware('tenancy');
+	// Route::get('/complete-registration', 'Auth\RegisterController@completeRegistration');
 
-	// User
-	Route::get('/home', 'HomeController@index')->name('home');
-	Route::post('/user/create', 'HomeController@register')->name('createUser');
-	Route::post('/user/delete/{id}', 'HomeController@deleteUser')->name('deleteUser');
-	Route::post('/user/assign-role/{id}', 'HomeController@assignRoleForUser')->name('assignRoleForUser');
+	Route::group(['middleware' => 'auth'], function () {
+		Route::get('/logout', 'HomeController@logout')->name('logout');
 
-	// Role
-	Route::get('/role', 'RoleController@showListRoles')->name('showListRoles');
-	Route::get('/role/view-create', 'RoleController@viewCreateRole')->name('viewCreateRole');
-	Route::post('/role/create', 'RoleController@createRole')->name('createRole');
-	Route::get('/role/view-edit/{id}', 'RoleController@viewEditRole')->name('viewEditRole');
-	Route::post('/role/edit/{id}', 'RoleController@updateRole')->name('updateRole');
-	Route::post('/role/delete/{id}', 'RoleController@deleteRole')->name('deleteRole');
+		// User
+		Route::get('/home', 'HomeController@index')->name('home');
+		Route::post('/user/create', 'HomeController@register')->name('createUser');
+		Route::post('/user/delete/{id}', 'HomeController@deleteUser')->name('deleteUser');
+		Route::post('/user/assign-role/{id}', 'HomeController@assignRoleForUser')->name('assignRoleForUser');
 
-	// Tenant
-	Route::get('/tenants/view-create', 'TenantController@viewCreateTenant')->name('viewCreateTenant');
-	Route::post('/tenants/create', 'TenantController@createTenant')->name('createTenant');
+		// Role
+		Route::get('/role', 'RoleController@showListRoles')->name('showListRoles');
+		Route::get('/role/view-create', 'RoleController@viewCreateRole')->name('viewCreateRole');
+		Route::post('/role/create', 'RoleController@createRole')->name('createRole');
+		Route::get('/role/view-edit/{id}', 'RoleController@viewEditRole')->name('viewEditRole');
+		Route::post('/role/edit/{id}', 'RoleController@updateRole')->name('updateRole');
+		Route::post('/role/delete/{id}', 'RoleController@deleteRole')->name('deleteRole');
+	});
 });

@@ -91,12 +91,12 @@ return [
     'storage_to_config_map' => [ // Used by the TenantConfig feature
         // 'paypal_api_key' => 'services.paypal.api_key',
     ],
-    'home_url' => '/app',
+    'home_url' => '/app/home',
     'queue_database_creation' => false,
     'migrate_after_creation' => true, // run migrations after creating a tenant
     'seed_after_migration' => true, // should the seeder run after automatic migration
     'seeder_parameters' => [
-        '--class' => 'DatabaseSeeder', // root seeder class to run after automatic migrations, e.g.: 'DatabaseSeeder'
+        '--class' => 'TenantDatabaseSeeder', // root seeder class to run after automatic migrations, e.g.: 'DatabaseSeeder'
     ],
     'queue_database_deletion' => false,
     'delete_database_after_tenant_deletion' => false, // delete the tenant's database after deleting the tenant
