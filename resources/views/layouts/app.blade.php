@@ -30,6 +30,9 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 <body>
+    <?php
+        $tenantInfo = tenancy()->getTenant();
+    ?>
 
     @include('layouts.navbar')
 

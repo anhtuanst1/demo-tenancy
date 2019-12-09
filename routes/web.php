@@ -33,4 +33,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/role/view-edit/{id}', 'RoleController@viewEditRole')->name('viewEditRole');
 	Route::post('/role/edit/{id}', 'RoleController@updateRole')->name('updateRole');
 	Route::post('/role/delete/{id}', 'RoleController@deleteRole')->name('deleteRole');
+
+	// Tenant
+	Route::get('/tenants/view-create', 'TenantController@viewCreateTenant')->name('viewCreateTenant');
+	Route::post('/tenants/create', 'TenantController@createTenant')->name('createTenant');
 });

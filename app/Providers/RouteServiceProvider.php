@@ -35,6 +35,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
+        $this->mapTenantRoutes();
+
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
@@ -69,5 +71,15 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapTenantRoutes()
+    {
+        if (file_exists(base_path('routes/tenant.php'))) {
+            Route::middleware(['web', 'tenancy'])
+                ->domain(in_array(request()->getHost(), config('tenancy.exempt_domains')) ? null:request()->getHost())
+                ->namespace($this->app['config']['tenancy.tenant_route_namespace'] ?? 'App\Http\Controllers')
+                ->group(base_path('routes/tenant.php'));
+        }
     }
 }

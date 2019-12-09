@@ -46,7 +46,11 @@ class HomeController extends RegisterController
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
-        $user->assignRole('super admin');
+
+        if (empty(tenancy()->getTenant()))
+            $user->assignRole('super admin');
+        else
+            $user->assignRole('system admin');
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath())->with([
