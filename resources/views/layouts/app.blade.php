@@ -28,6 +28,28 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
+    <!-- Full calendar -->
+    <link href="{{ asset('Timeline view with custom columns - Demos _ FullCalendar_files/demo-to-codepen.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('Timeline view with custom columns - Demos _ FullCalendar_files/main.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('Timeline view with custom columns - Demos _ FullCalendar_files/main.min(1).css') }}" rel="stylesheet">
+    <link href="{{ asset('Timeline view with custom columns - Demos _ FullCalendar_files/main.min(2).css') }}" rel="stylesheet">
+
+
+    <script src="{{ asset('Timeline view with custom columns - Demos _ FullCalendar_files/demo-to-codepen.js.download') }}"></script>
+    <script src="{{ asset('Timeline view with custom columns - Demos _ FullCalendar_files/main.min.js.download') }}"></script>
+    <script src="{{ asset('Timeline view with custom columns - Demos _ FullCalendar_files/main.min.js(1).download') }}"></script>
+    <script src="{{ asset('Timeline view with custom columns - Demos _ FullCalendar_files/main.min.js(2).download') }}"></script>
+    <script src="{{ asset('Timeline view with custom columns - Demos _ FullCalendar_files/main.min.js(3).download') }}"></script>
+
+    <!-- <link href="{{ asset('fullcalendar/packages/core/main.css') }}" rel='stylesheet' />
+    <link href="{{ asset('fullcalendar/packages/daygrid/main.css') }}" rel='stylesheet' />
+    <link href="{{ asset('fullcalendar/packages/timegrid/main.css') }}" rel='stylesheet' />
+    <link href="{{ asset('fullcalendar/packages/list/main.css') }}" rel='stylesheet' /> -->
+
+    <!-- <link href="{{ asset('fullcalendar/timeline/main.min.css') }}" rel='stylesheet' />
+    <link href="{{ asset('fullcalendar/resource-timeline/main.min.css') }}" rel='stylesheet' /> -->
 </head>
 <body>
     <?php
@@ -72,5 +94,15 @@
             });
         });
     </script>
+
+    <!-- <script src="{{ asset('fullcalendar/packages/core/main.js') }}"></script>
+    <script src="{{ asset('fullcalendar/packages/interaction/main.js') }}"></script>
+    <script src="{{ asset('fullcalendar/packages/daygrid/main.js') }}"></script>
+    <script src="{{ asset('fullcalendar/packages/timegrid/main.js') }}"></script>
+    <script src="{{ asset('fullcalendar/packages/list/main.js') }}"></script> -->
+
+    <!-- <script src="{{ asset('fullcalendar/timeline/main.min.js') }}"></script>
+    <script src="{{ asset('fullcalendar/resource-common/main.min.js') }}"></script>
+    <script src="{{ asset('fullcalendar/resource-timeline/main.min.js') }}"></script> -->
 </body>
 </html>

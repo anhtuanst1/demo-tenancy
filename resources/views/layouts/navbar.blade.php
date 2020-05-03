@@ -27,6 +27,12 @@
                     </a>
                 </li>
             @endcan
+            <li class="nav-item @if (isset($slug) && $slug == 'schedule') active @endif">
+                <a class="nav-link" href="{{ route('viewSchedule') }}">
+                    Schedule
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
         </ul>
         <ul class="navbar-nav nav-pills nav-fill">
             <li class="nav-item dropdown">

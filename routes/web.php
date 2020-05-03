@@ -37,4 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
 	// Tenant
 	Route::get('/tenants/view-create', 'TenantController@viewCreateTenant')->name('viewCreateTenant');
 	Route::post('/tenants/create', 'TenantController@createTenant')->name('createTenant');
+
+	// Schedule
+	Route::get('/schedule/view-schedule', 'ScheduleController@viewSchedule')->name('viewSchedule');
 });
